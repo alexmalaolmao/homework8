@@ -1,12 +1,12 @@
 const initializeBuffers = (gl) => {
 
     const positionBuffer = initializePositionBuffer(gl);
-    const colorBuffer = initializeColorBuffer(gl);
+    const textureCoordBuffer = initializeTextureBuffer(gl);
     const indexBuffer = initializeIndexBuffer(gl);
 
     return {
         position: positionBuffer,
-        color: colorBuffer,
+        textureCoord: textureCoordBuffer,
         indices: indexBuffer,
     };
 }
@@ -35,6 +35,29 @@ const initializeColorBuffer = (gl) => {
 
     return colorBuffer;
 }
+
+const initializeTextureBuffer = (gl) => {
+    const textureCoordBuffer = gl.createBuffer();
+    gl.bindBuffer(
+        gl.ARRAY_BUFFER, textureCoordBuffer);
+
+    const textureCoordinates = [
+        0.0, 0.0,  1.0, 0.0,  1.0, 1.0,  0.0, 1.0,
+        0.0, 0.0,  1.0, 0.0,  1.0, 1.0,  0.0, 1.0,
+        0.0, 0.0,  1.0, 0.0,  1.0, 1.0,  0.0, 1.0,
+        0.0, 0.0,  1.0, 0.0,  1.0, 1.0,  0.0, 1.0,
+        0.0, 0.0,  1.0, 0.0,  1.0, 1.0,  0.0, 1.0,
+        0.0, 0.0,  1.0, 0.0,  1.0, 1.0,  0.0, 1.0,
+    ];
+
+    gl.bufferData(
+        gl.ARRAY_BUFFER,
+        new Float32Array(textureCoordinates),
+        gl.STATIC_DRAW);
+
+    return textureCoordBuffer
+}
+
 
 const initializePositionBuffer = (gl) => {
     const positionBuffer = gl.createBuffer();
